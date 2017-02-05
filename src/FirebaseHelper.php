@@ -18,7 +18,19 @@ class FirebaseHelper
      * Almacena la URL base de la API.
      */
     const BASE_URL = 'https://fcm.googleapis.com/fcm/send';
-    
+    /**
+     * Almacena el KEY para conectarse
+     * @var string
+     */
+    protected $apiKey = '';
+    /**
+     * 
+     * @param string $apiKey
+     */
+    public function __construct($apiKey)
+    {
+        $this->apiKey = $apiKey;
+    }
     /**
      * 
      * @param array $ids
@@ -77,7 +89,7 @@ class FirebaseHelper
         $request = new Request();
         $request->getHeaders()->addHeaders(array(
             'Content-Type' => 'application/json',
-            'Authorization' => 'key=AIzaSyCi8L3TV-BBKzAs57BWfH2R8A0v-QlZB3Q'
+            'Authorization' => 'key=' . $this->apiKey
         ));
         $request->setUri(self::BASE_URL);
         $request->setMethod(Request::METHOD_POST);
